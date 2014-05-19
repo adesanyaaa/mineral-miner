@@ -1,0 +1,5 @@
+Mineral Miner is a incremental game for Android devices using OpenGL ES.
+
+Currently, it outputs to a resoultion of 320x480 and then upscales it to the device's resolution.
+
+To build the game, just import it into eclipse with the Android plug-in and click build.
