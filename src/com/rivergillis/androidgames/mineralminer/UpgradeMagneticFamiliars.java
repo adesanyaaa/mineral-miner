@@ -31,25 +31,27 @@ public class UpgradeMagneticFamiliars extends Upgrade {
 			else if (level <= 20)
 				nextGoldPerSecond += 100;
 			else if (level <= 30)
-				nextGoldPerSecond += 200;
+				nextGoldPerSecond += 250;
 			else if (level <= 40)
-				nextGoldPerSecond += 300;
-			else if (level <= 50)
-				nextGoldPerSecond += 400;
-			else if (level <= 75)
 				nextGoldPerSecond += 500;
-			else if (level <= 100)
+			else if (level <= 50)
 				nextGoldPerSecond += 1000;
-			else if (level <= 125)
-				nextGoldPerSecond += 1500;
-			else if (level <= 150)
+			else if (level <= 60)
 				nextGoldPerSecond += 2000;
-			else if (level <= 175)
+			else if (level <= 75)
 				nextGoldPerSecond += 3000;
-			else if (level <= 200)
-				nextGoldPerSecond += 4000;
-			else
+			else if (level <= 100)
+				nextGoldPerSecond += 5000;
+			else if (level <= 125)
+				nextGoldPerSecond += 7000;
+			else if (level <= 150)
 				nextGoldPerSecond += 10000;
+			else if (level <= 175)
+				nextGoldPerSecond += 30000;
+			else if (level <= 200)
+				nextGoldPerSecond += 50000;
+			else
+				nextGoldPerSecond += 100000;
 		} else {
 			Log.d("Upgrade", "Error, not enough money in wallet");
 		}

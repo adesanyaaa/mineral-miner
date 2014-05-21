@@ -197,11 +197,11 @@ public class MinerRenderer {
 			name = Wallet.armorPierce.name;
 			if (Wallet.armorPierce.level < Wallet.armorPierce.maxLevel) {
 				level = "Level: " + Wallet.armorPierce.level + " -> " + (Wallet.armorPierce.level + 1);
-				effect = "Pierce: " + Wallet.armorPierce.percentPierce + "%" + " -> " + Wallet.armorPierce.nextPierce + "%";
+				effect = "Pierce: " + (int)Wallet.armorPierce.percentPierce + "%" + " -> " + (int)Wallet.armorPierce.nextPierce + "%";
 				price = "Price: " + displayLargeNumber(Wallet.armorPierce.price) + " gold";
 			} else {
 				level = "Level: " + Wallet.armorPierce.level + " (MAX)";
-				effect = "Pierce: " + Wallet.armorPierce.percentPierce + "% (MAX)";
+				effect = "Pierce: " + (int)Wallet.armorPierce.percentPierce + "% (MAX)";
 				price = "";
 			}
 			description = Wallet.armorPierce.description;
@@ -260,6 +260,22 @@ public class MinerRenderer {
 			description = Wallet.armorChip.description;
 			lowerDescr = Wallet.armorChip.lowerDescription;
 			has2Effects = true;
+			break;
+		case 8:
+			name = Wallet.sharpenedPick.name;
+			if (Wallet.sharpenedPick.level < Wallet.sharpenedPick.maxLevel) {
+				level = "Level: " + Wallet.sharpenedPick.level + " -> " + (Wallet.sharpenedPick.level + 1);
+				effect = "Percent: " + Wallet.sharpenedPick.percentDamage + "% -> " + Wallet.sharpenedPick.nextPercent + "%";
+				price = "Price: " + displayLargeNumber(Wallet.sharpenedPick.price) + " gold";
+			} else {
+				level = "Level: " + Wallet.sharpenedPick.level + " (MAX)";
+				effect = "Percent: " + Wallet.sharpenedPick.percentDamage + "% (MAX)";
+				price = "";
+			}
+			effect2 = "";
+			description = Wallet.sharpenedPick.description;
+			lowerDescr = Wallet.sharpenedPick.lowerDescription;
+			has2Effects = false;
 			break;
 		case 9:
 			name = Wallet.addFamiliar.name;

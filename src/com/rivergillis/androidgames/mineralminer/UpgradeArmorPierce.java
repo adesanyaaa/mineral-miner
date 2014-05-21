@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class UpgradeArmorPierce extends Upgrade {
 	public static final int UPGRADE_NUMBER = 2;
-	public static final float PERCENT_INCREASE = 1.33f;
+	public static final float PERCENT_INCREASE = 2f;
 	
 	public float percentPierce;
 	public float nextPierce;
@@ -14,7 +14,7 @@ public class UpgradeArmorPierce extends Upgrade {
 		name = "Armor Pierce";
 		description = "Pickaxe strikes through";
 		lowerDescription = "more of the enemy's armor";
-		maxLevel = 75;
+		maxLevel = 50;
 		percentPierce = 0;
 		nextPierce = percentPierce + PERCENT_INCREASE;
 		nextPierce = Math.round(nextPierce * 100.0f) / 100.0f;

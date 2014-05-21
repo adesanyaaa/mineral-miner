@@ -13,7 +13,7 @@ public class UpgradeFamiliarDamage extends Upgrade{
 		name = "Increase Familiar Damage";
 		description = "Increases the damage";
 		lowerDescription = "of each familiar";
-		maxLevel = 50;
+		maxLevel = 200;
 		damage = 1;
 		nextDamage = 3;
 	}
@@ -24,16 +24,16 @@ public class UpgradeFamiliarDamage extends Upgrade{
 			super.buyUpgrade();
 			damage = nextDamage;
 			
-			if (level >= 39)
-				nextDamage = damage + 50;
+			if (level >= 100)
+				nextDamage = damage + 10000;
 			else if (level >= 19)
-				nextDamage = damage + 20;
+				nextDamage = damage + 100;
 			else if (level >= 9)
-				nextDamage = damage + 10;
+				nextDamage = damage + 25;
 			else if (level >= 5)
-				nextDamage = damage + 5;
+				nextDamage = damage + 15;
 			else
-				nextDamage = damage + 3;
+				nextDamage = damage + 5;
 		} else {
 			Log.d("Upgrade", "Error, not enough money in wallet");
 		}

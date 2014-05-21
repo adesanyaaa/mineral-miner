@@ -33,25 +33,25 @@ public class Pick extends Upgrade {
 			super.buyUpgrade();
 			damage = nextDamage;
 			if (level < 10)
-				nextDamage = (long)(damage + ((level * 1.3) * 1.5));
+				nextDamage = (long)(damage + ((level * 1.6) * 2.0));
 			else if (level < 20)
-				nextDamage = (long)(damage + ((level * 1.8) * 2.0));
+				nextDamage = (long)(damage + ((level * 2.8) * 3.0));
 			else if (level < 30)
-				nextDamage = (long)(damage + ((level * 2.25) * 3.0));
+				nextDamage = (long)(damage + ((level * 3.55) * 4.0));
 			else if (level < 40)
-				nextDamage = (long)(damage + ((level * 2.5) * 4.0));
+				nextDamage = (long)(damage + ((level * 5.2) * 5.5));
 			else if (level < 50)
-				nextDamage = (long)(damage + ((level * 2.8) * 5.5));
+				nextDamage = (long)(damage + ((level * 7.2) * 7.0));
 			else if (level < 60)
-				nextDamage = (long)(damage + ((level * 3.0) * 7.0));
+				nextDamage = (long)(damage + ((level * 10.8) * 10.0));
 			else if (level < 70)
-				nextDamage = (long)(damage + ((level * 3.3) * 8.0));
+				nextDamage = (long)(damage + ((level * 13.3) * 13.0));
 			else if (level < 80)
-				nextDamage = (long)(damage + ((level * 3.8) * 9.0));
+				nextDamage = (long)(damage + ((level * 25.8) * 18.0));
 			else if (level < 90)
-				nextDamage = (long)(damage + ((level * 4.1) * 10.0));
+				nextDamage = (long)(damage + ((level * 40.1) * 20.0));
 			else
-				nextDamage = (long)(damage + ((level * 5.0) * 15.0));
+				nextDamage = (long)(damage + ((level * 80.0) * 25.0));
 		} else {
 			Log.d("Upgrade", "Error, not enough money in wallet");
 		}

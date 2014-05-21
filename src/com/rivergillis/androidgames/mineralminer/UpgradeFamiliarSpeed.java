@@ -39,7 +39,7 @@ public class UpgradeFamiliarSpeed extends Upgrade{
 	@Override
 	public void increasePrice() {
 		price = (long)(price * priceIncrease);
-		if (priceIncrease > 2.0) {
+		if (priceIncrease > 1.4) {
 			priceIncrease -= 0.2;		// used to balance the prices
 		}
 	}
