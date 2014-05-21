@@ -34,6 +34,7 @@ public class Wallet {
 	public static UpgradeFamiliarSpeed familiarSpeed;
 	public static UpgradeMagneticFamiliars magneticFamiliars;
 	public static UpgradeArmorChip armorChip;
+	public static UpgradeSharpenedPickaxe sharpenedPick;
 	
 	public static Pick pick;
 	
@@ -42,10 +43,11 @@ public class Wallet {
 		mineralMerchant = new UpgradeMineralMerchant(200, 2.0f);
 		luckyHit = new UpgradeLuckyHit(200, 3.0f);
 		addFamiliar = new UpgradeFamiliar(2000, 2.5f);
-		familiarDamage = new UpgradeFamiliarDamage(1000, 3.0f);
-		familiarSpeed = new UpgradeFamiliarSpeed(200, 2.5f);
+		familiarDamage = new UpgradeFamiliarDamage(5000, 2.5f);
+		familiarSpeed = new UpgradeFamiliarSpeed(200, 2.2f);
 		magneticFamiliars = new UpgradeMagneticFamiliars(200, 2.0f);
-		armorChip = new UpgradeArmorChip(300, 2.5f);
+		armorChip = new UpgradeArmorChip(300, 2.0f);
+		sharpenedPick = new UpgradeSharpenedPickaxe(1000000, 10.0f);
 		pick = new Pick(500, 2.5f);
 		defeatedRocks = new boolean[MinerScreen.NUMBER_OF_ROCKS];
 		currentRock = 0;
@@ -70,6 +72,9 @@ public class Wallet {
 			break;
 		case 5:
 			armorChip.buyUpgrade();
+			break;
+		case 8:
+			sharpenedPick.buyUpgrade();
 			break;
 		case 9:
 			addFamiliar.buyUpgrade();
@@ -105,6 +110,10 @@ public class Wallet {
 			return false;
 		case 5:
 			if (coins >= armorChip.price && armorChip.level < armorChip.maxLevel)
+				return true;
+			return false;
+		case 8:
+			if (coins >= sharpenedPick.price && sharpenedPick.level < sharpenedPick.maxLevel)
 				return true;
 			return false;
 		case 9:
@@ -230,6 +239,10 @@ public class Wallet {
             out.write(Long.toString(armorChip.nextChip));
             out.write("\n");
             
+            out.write("shplevel\n");
+            out.write(Integer.toString(sharpenedPick.level));
+            out.write("\n");
+            
             Log.d("Wallet", "Save completed.");
         } catch (IOException e) {
         	Log.d("Wallet", "Error, could not save file." + e.getMessage());
@@ -299,6 +312,8 @@ public class Wallet {
             		armorChip.chip = Long.parseLong(in.readLine());
             	else if (command.equals("uacnextchip"))
             		armorChip.nextChip = Long.parseLong(in.readLine());
+            	else if (command.equals("shplevel"))
+            		sharpenedPick.load(Integer.parseInt(in.readLine()));
             	else
             		Log.d("Wallet", "Error, unknown command " + command);
             }
