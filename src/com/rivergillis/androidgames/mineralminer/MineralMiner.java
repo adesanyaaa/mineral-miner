@@ -30,7 +30,7 @@ public class MineralMiner extends GLGame {
         } else {
             Assets.reload();			// if not first time, reload the assets
         }
-    }     
+    }
     
 //    // Also pause the music if it is playing
 //    @Override

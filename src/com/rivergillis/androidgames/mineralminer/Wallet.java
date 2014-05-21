@@ -41,14 +41,16 @@ public class Wallet {
 		armorPierce = new UpgradeArmorPierce(200, 2.0f);
 		mineralMerchant = new UpgradeMineralMerchant(200, 2.0f);
 		luckyHit = new UpgradeLuckyHit(200, 3.0f);
-		addFamiliar = new UpgradeFamiliar(5000, 2.5f);
+		addFamiliar = new UpgradeFamiliar(2000, 2.5f);
 		familiarDamage = new UpgradeFamiliarDamage(1000, 3.0f);
 		familiarSpeed = new UpgradeFamiliarSpeed(200, 2.5f);
-		magneticFamiliars = new UpgradeMagneticFamiliars(200, 2.5f);
+		magneticFamiliars = new UpgradeMagneticFamiliars(200, 2.0f);
 		armorChip = new UpgradeArmorChip(300, 2.5f);
 		pick = new Pick(500, 2.5f);
 		defeatedRocks = new boolean[MinerScreen.NUMBER_OF_ROCKS];
 		currentRock = 0;
+		currentBackground = 0;
+		coins = 0;
 		load(files);
 	}
 	
@@ -312,6 +314,121 @@ public class Wallet {
                     in.close();
             } catch (IOException e) {
             }
+        }
+    }
+    
+    public static void deleteAndStartOver(FileIO files) {
+        BufferedWriter out = null;
+        try {
+            out = new BufferedWriter(new OutputStreamWriter(files.writeFile(".mm")));
+            out.write("lastplayedversion\n");
+            out.write(Integer.toString(-1));
+            out.write("\n");
+            
+            out.write("currentr\n");
+            out.write(Integer.toString(0));
+            out.write("\n");
+            
+            out.write("currentb\n");
+            out.write(Integer.toString(0));
+            out.write("\n");
+            
+            out.write("coins\n");
+            out.write(Long.toString(0));
+            out.write("\n");
+            
+            for (int i = 0; i < MinerScreen.NUMBER_OF_ROCKS; i++) {
+            	out.write("defeated\n");
+            	out.write(Boolean.toString(false));
+            	out.write("\n");
+            }
+            
+            out.write("picklevel\n");
+            out.write(Integer.toString(0));
+            out.write("\n");
+            
+            out.write("pickdamage\n");
+            out.write(Long.toString(2));
+            out.write("\n");
+            
+            out.write("picknextdamage\n");
+            out.write(Long.toString(4));
+            out.write("\n");
+            
+            out.write("uaplevel\n");
+            out.write(Integer.toString(0));
+            out.write("\n");
+            
+            out.write("ummlevel\n");
+            out.write(Integer.toString(0));
+            out.write("\n");
+            
+            out.write("ulhlevel\n");
+            out.write(Integer.toString(0));
+            out.write("\n");
+            
+            out.write("numfamiliars\n");
+            out.write(Integer.toString(0));
+            out.write("\n");
+            
+            out.write("famdamagelevel\n");
+            out.write(Integer.toString(0));
+            out.write("\n");
+            
+            out.write("famdamage\n");
+            out.write(Integer.toString(1));
+            out.write("\n");
+            
+            out.write("famnextdamage\n");
+            out.write(Integer.toString(3));
+            out.write("\n");
+            
+            out.write("famspeedlevel\n");
+            out.write(Integer.toString(0));
+            out.write("\n");
+            
+            out.write("famspeed\n");
+            out.write(Float.toString(5.0f));
+            out.write("\n");
+            
+            out.write("famnextspeed\n");
+            out.write(Float.toString(4.8f));
+            out.write("\n");
+            
+            out.write("magnetfamlevel\n");
+            out.write(Integer.toString(0));
+            out.write("\n");
+            
+            out.write("magnetfamgps\n");
+            out.write(Float.toString(0.0f));
+            out.write("\n");
+            
+            out.write("magnetfamnextgps\n");
+            out.write(Float.toString(50f));
+            out.write("\n");
+            
+            out.write("uaclevel\n");
+            out.write(Integer.toString(0));
+            out.write("\n");
+            
+            out.write("uacchip\n");
+            out.write(Long.toString(0));
+            out.write("\n");
+            
+            out.write("uacnextchip\n");
+            out.write(Long.toString(2));
+            out.write("\n");
+            
+            Log.d("Wallet", "Delete completed.");
+        } catch (IOException e) {
+        	Log.d("Wallet", "Error, could not save file." + e.getMessage());
+        } finally {
+            try {
+                if (out != null)
+                    out.close();
+            } catch (IOException e) {
+            }
+            setUpWallet(files);
         }
     }
 }

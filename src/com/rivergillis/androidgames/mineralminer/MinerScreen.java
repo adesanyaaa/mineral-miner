@@ -36,6 +36,8 @@ public class MinerScreen extends GLScreen {
 	long damageReduction;
 	
 	boolean inUpgradeScreen;
+	boolean inOptions;
+	int optionsStage = 1;
 	int selectedUpgrade = 1;
 	float timeSinceLastFamiliarAttack = 0;
 	float timeAtLastFamiliarAttack = 0;
@@ -85,7 +87,7 @@ public class MinerScreen extends GLScreen {
 			
 			touchPoint.set(event.x, event.y);
 			guiCam.touchToWorld(touchPoint);
-			if (!inUpgradeScreen) {
+			if (!inUpgradeScreen && !inOptions) {
 				if (OverlapTester.pointInRectangle(rockBounds, touchPoint)) {
 					hitRock();
 				}
@@ -111,9 +113,21 @@ public class MinerScreen extends GLScreen {
 				if (OverlapTester.pointInRectangle(upgradeButtonBounds, touchPoint)) {
 					inUpgradeScreen = true;
 				}
-			}
-			else {
-				if (OverlapTester.pointInRectangle(upgradeButtonBounds, touchPoint)) {
+			} else if (inOptions) {
+				if (OverlapTester.pointInRectangle(MinerRenderer.deleteBounds, touchPoint)) {
+					if (optionsStage < 2) {
+						++optionsStage;
+					} else {
+						Wallet.deleteAndStartOver(game.getFileIO());
+						getNewRock();
+						inOptions = false;
+						inUpgradeScreen = false;
+					}
+				} else {
+					inOptions = false;
+				}
+			} else {
+				if (OverlapTester.pointInRectangle(MinerRenderer.exitBounds, touchPoint)) {
 					inUpgradeScreen = false;
 				}
 				if (OverlapTester.pointInRectangle(MinerRenderer.buyBounds, touchPoint)) {
@@ -123,6 +137,10 @@ public class MinerScreen extends GLScreen {
 				for (int x = 0; x < upgradeBounds.length; x++) {
 					if (OverlapTester.pointInRectangle(upgradeBounds[x], touchPoint))
 						selectedUpgrade = x + 1;
+				}
+				if (OverlapTester.pointInRectangle(MinerRenderer.optionsBOunds, touchPoint)) {
+					inOptions = true;
+					optionsStage = 1;
 				}
 			}
 		}
@@ -234,16 +252,16 @@ public class MinerScreen extends GLScreen {
 			rock = new Rock("Rock3", 30, 750, 3);
 			break;
 		case 3:
-			rock = new Rock("Rock4", 50, 1500, 5);
+			rock = new Rock("Rock4", 50, 1500, 3);
 			break;
 		case 4:
-			rock = new Rock("Rock5", 100, 2500, 10);
+			rock = new Rock("Rock5", 100, 2500, 5);
 			break;
 		case 5:
-			rock = new Rock("Rock6", 150, 3500, 15);
+			rock = new Rock("Rock6", 150, 3500, 10);
 			break;
 		case 6:
-			rock = new Rock("Rock7", 300, 5500, 20);
+			rock = new Rock("Rock7", 300, 5500, 15);
 			break;
 		case 7:
 			rock = new Rock("Rock8", 600, 7000, 0);
@@ -374,11 +392,21 @@ public class MinerScreen extends GLScreen {
 		}
 		
 		batcher.beginBatch(Assets.droidmono11);
-		if (inUpgradeScreen)
+		if (inUpgradeScreen) {
 			renderer.drawUpgradeText(batcher, selectedUpgrade);
-		else
+		} else
 			renderer.drawGameText(batcher, rock);
 		batcher.endBatch();
+		
+		if (inOptions) {
+			batcher.beginBatch(Assets.upgrades);
+			renderer.drawOptions(batcher);
+			batcher.endBatch();
+			
+			batcher.beginBatch(Assets.droidmono11);
+			renderer.drawOptionsText(batcher, optionsStage);
+			batcher.endBatch();
+		}
 		
 		gl.glDisable(GL10.GL_BLEND);
 	}

@@ -71,6 +71,8 @@ public class MinerRenderer {
 	}
 	
 	public static Rectangle buyBounds = new Rectangle(271 - 32, 25 - 16, 64, 32);
+	public static Rectangle exitBounds = new Rectangle(300 - 16, 460 - 16, 32, 32);
+	public static Rectangle optionsBOunds = new Rectangle(20 - 16, 460 - 16, 32, 32);
 	
 	public void drawUpgradeScreen(SpriteBatcher batcher, int selected, boolean canBuy) {
 		for (int i = 0; i < 3; i++) {
@@ -132,6 +134,9 @@ public class MinerRenderer {
 		case 12:
 			batcher.drawSprite(271, 252, 64, 64, Assets.upgradeSelection);
 		}
+		
+		batcher.drawSprite(300, 460, 32, 32, Assets.exitButton);
+		batcher.drawSprite(20, 460, 32, 32, Assets.optionsButton);
 	}
 	
 	String top = "";		// declare variables here to prevent constant garbage collection
@@ -434,6 +439,44 @@ public class MinerRenderer {
 			} else
 				x += 15;
 		}
+	}
+	
+	public void drawOptions(SpriteBatcher batcher) {
+		batcher.drawSprite(320 / 2, 480 / 2, 200, 248, Assets.optionsScreen);
+	}
+	
+	String first;
+	String second;
+	String option1;
+	String option2;
+	
+	float firstWidth;
+	float secondWidth;
+	float option1Width;
+	float option2Width;
+	
+	public static Rectangle deleteBounds = new Rectangle((320 / 2) - 90, 180 - 15, 180, 30);
+	
+	public void drawOptionsText(SpriteBatcher batcher, int stage) {
+		if (stage < 2) {
+			second = "Start over?";
+			option1 = "Yes, delete save";
+		} else {
+			second = "Are you sure?";
+			option1 = "Delete it already!";
+		}
+		first = "Delete save file?";
+		option2 = "No, don't delete";
+		
+		firstWidth = Assets.font.glyphWidth * first.length();
+		secondWidth = Assets.font.glyphWidth * second.length();
+		option1Width = Assets.font.glyphWidth * option1.length();
+		option2Width = Assets.font.glyphWidth * option2.length();
+		
+		Assets.font.drawText(batcher, first, (160 - firstWidth / 2) + 5, 340);
+		Assets.font.drawText(batcher, second, (160 - secondWidth / 2) + 5, 320);
+		Assets.font.drawText(batcher, option1, (160 - option1Width / 2) + 5, 180);
+		Assets.font.drawText(batcher, option2, (160 - option2Width / 2) + 5, 140);
 	}
 	
 	public String displayLargeNumber(long num) {
