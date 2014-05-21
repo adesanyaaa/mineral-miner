@@ -26,20 +26,30 @@ public class UpgradeMagneticFamiliars extends Upgrade {
 			super.buyUpgrade();
 			goldPerSecond = nextGoldPerSecond;
 			
-			if (level <= 20)
+			if (level <= 10)
 				nextGoldPerSecond += 50;
-			else if (level <= 50)
+			else if (level <= 20)
 				nextGoldPerSecond += 100;
-			else if (level <= 75)
+			else if (level <= 30)
 				nextGoldPerSecond += 200;
-			else if (level <= 100)
+			else if (level <= 40)
 				nextGoldPerSecond += 300;
-			else if (level <= 150)
+			else if (level <= 50)
+				nextGoldPerSecond += 400;
+			else if (level <= 75)
 				nextGoldPerSecond += 500;
-			else if (level <= 200)
+			else if (level <= 100)
 				nextGoldPerSecond += 1000;
-			else
+			else if (level <= 125)
+				nextGoldPerSecond += 1500;
+			else if (level <= 150)
 				nextGoldPerSecond += 2000;
+			else if (level <= 175)
+				nextGoldPerSecond += 3000;
+			else if (level <= 200)
+				nextGoldPerSecond += 4000;
+			else
+				nextGoldPerSecond += 10000;
 		} else {
 			Log.d("Upgrade", "Error, not enough money in wallet");
 		}
@@ -48,7 +58,7 @@ public class UpgradeMagneticFamiliars extends Upgrade {
 	@Override
 	public void increasePrice() {
 		price = (long)(price * priceIncrease);
-		if (priceIncrease > 1.6) {
+		if (priceIncrease > 1.2) {
 			priceIncrease -= 0.1;		// used to balance the prices
 		}
 	}

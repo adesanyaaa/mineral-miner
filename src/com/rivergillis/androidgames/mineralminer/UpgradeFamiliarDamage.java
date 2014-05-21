@@ -15,7 +15,7 @@ public class UpgradeFamiliarDamage extends Upgrade{
 		lowerDescription = "of each familiar";
 		maxLevel = 50;
 		damage = 1;
-		nextDamage = 2;
+		nextDamage = 3;
 	}
 	
 	@Override
@@ -25,11 +25,15 @@ public class UpgradeFamiliarDamage extends Upgrade{
 			damage = nextDamage;
 			
 			if (level >= 39)
-				nextDamage = damage + 3;
+				nextDamage = damage + 50;
 			else if (level >= 19)
-				nextDamage = damage + 2;
+				nextDamage = damage + 20;
+			else if (level >= 9)
+				nextDamage = damage + 10;
+			else if (level >= 5)
+				nextDamage = damage + 5;
 			else
-				nextDamage = damage + 1;
+				nextDamage = damage + 3;
 		} else {
 			Log.d("Upgrade", "Error, not enough money in wallet");
 		}
