@@ -18,7 +18,7 @@ import com.rivergillis.androidgames.framework.math.Vector2;
 
 public class MinerScreen extends GLScreen {
 	
-	public static final int NUMBER_OF_ROCKS = 30;
+	public static final int NUMBER_OF_ROCKS = 50;
 	
 	Camera2D guiCam;
 	Vector2 touchPoint;
@@ -196,6 +196,11 @@ public class MinerScreen extends GLScreen {
 		} else
 			damageToDo = Wallet.pick.damage;
 		
+		if (Wallet.sharpenedPick.level > 0) {
+			damageToDo += (rock.health * (Wallet.sharpenedPick.percentDamage * 0.01));
+			Log.d("MinerScreen", "Adding " + (rock.health * (Wallet.sharpenedPick.percentDamage * 0.01)) + " to make " + damageToDo);
+		}
+		
 		if (Wallet.armorPierce.percentPierce != 0f)
 			damageReduction = (long)(rock.armor - (rock.armor * (Wallet.armorPierce.percentPierce * 0.01)));
 		else
@@ -209,9 +214,7 @@ public class MinerScreen extends GLScreen {
 			else
 				rock.breakLevel = 1;
 		}
-		Log.d("MinerScreen", "% health: " + ((float)rock.health / (float)rock.initialHealth) + " break level: " + rock.breakLevel);
 		touchedFrames = 5;
-		Log.d("MinerScreen", rock.name + " just lost health, current hp now at " + rock.health);
 		if (rock.health <= 0)
 			killRock();
 		else
@@ -246,91 +249,151 @@ public class MinerScreen extends GLScreen {
 			rock = new Rock("Rock", 10, 100, 0);
 			break;
 		case 1:
-			rock = new Rock("Rock2", 20, 500, 1);
+			rock = new Rock("Rock2", 20, 500, 0);
 			break;
 		case 2:
-			rock = new Rock("Rock3", 30, 750, 3);
+			rock = new Rock("Rock3", 30, 1050, 1);
 			break;
 		case 3:
-			rock = new Rock("Rock4", 50, 1500, 3);
+			rock = new Rock("Rock4", 50, 2000, 3);
 			break;
 		case 4:
-			rock = new Rock("Rock5", 100, 2500, 5);
+			rock = new Rock("Rock5", 100, 3500, 5);
 			break;
 		case 5:
-			rock = new Rock("Rock6", 150, 3500, 10);
+			rock = new Rock("Rock6", 150, 5500, 10);
 			break;
 		case 6:
-			rock = new Rock("Rock7", 300, 5500, 15);
+			rock = new Rock("Rock7", 300, 7500, 15);
 			break;
 		case 7:
-			rock = new Rock("Rock8", 600, 7000, 0);
+			rock = new Rock("Rock8", 600, 10000, 0);
 			break;
 		case 8:
-			rock = new Rock("Rock9", 500, 9000, 30);
+			rock = new Rock("Rock9", 500, 12000, 30);
 			break;
 		case 9:
-			rock = new Rock("Rock10", 1, 25000, 100);
+			rock = new Rock("Rock10", 30, 25000, 100);
 			break;
 		case 10:
-			rock = new Rock("Rock11", 1000, 10000, 35);
+			rock = new Rock("Rock11", 1000, 15000, 35);
 			break;
 		case 11:
-			rock = new Rock("Rock12", 1250, 15000, 35);
+			rock = new Rock("Rock12", 1250, 25000, 35);
 			break;
 		case 12:
-			rock = new Rock("Rock13", 1500, 20000, 40);
+			rock = new Rock("Rock13", 1500, 35000, 40);
 			break;
 		case 13:
-			rock = new Rock("Rock14", 2000, 23000, 45);
+			rock = new Rock("Rock14", 2000, 50000, 45);
 			break;
 		case 14:
-			rock = new Rock("Rock15", 10000, 37500, 0);
+			rock = new Rock("Rock15", 10000, 70500, 0);
 			break;
 		case 15:
-			rock = new Rock("Rock16", 5000, 26000, 50);
+			rock = new Rock("Rock16", 5000, 60000, 50);
 			break;
 		case 16:
-			rock = new Rock("Rock17", 7000, 30000, 55);
+			rock = new Rock("Rock17", 7000, 70000, 55);
 			break;
 		case 17:
-			rock = new Rock("Rock18", 8500, 33000, 55);
+			rock = new Rock("Rock18", 8500, 83000, 55);
 			break;
 		case 18:
-			rock = new Rock("Rock19", 10000, 40000, 60);
+			rock = new Rock("Rock19", 10000, 100000, 60);
 			break;
 		case 19:
-			rock = new Rock("Rock20", 13000, 48550, 65);
+			rock = new Rock("Rock20", 13000, 98550, 65);
 			break;
 		case 20:
-			rock = new Rock("Rock21", 15000, 58000, 70);
+			rock = new Rock("Rock21", 15000, 108000, 70);
 			break;
 		case 21:
-			rock = new Rock("Rock22", 20000, 75000, 70);
+			rock = new Rock("Rock22", 20000, 135000, 70);
 			break;
 		case 22:
-			rock = new Rock("Rock23", 25000, 80000, 75);
+			rock = new Rock("Rock23", 25000, 148000, 75);
 			break;
 		case 23:
-			rock = new Rock("Rock24", 30000, 95000, 80);
+			rock = new Rock("Rock24", 30000, 159500, 80);
 			break;
 		case 24:
-			rock = new Rock("Rock25", 38000, 110000, 85);
+			rock = new Rock("Rock25", 38000, 172000, 85);
 			break;
 		case 25:
-			rock = new Rock("Rock26", 100000, 450000, 0);
+			rock = new Rock("Rock26", 100000, 1000000, 0);
 			break;
 		case 26:
-			rock = new Rock("Rock27", 50000, 200000, 90);
+			rock = new Rock("Rock27", 50000, 400000, 90);
 			break;
 		case 27:
-			rock = new Rock("Rock28", 65000, 130000, 90);
+			rock = new Rock("Rock28", 65000, 570000, 90);
 			break;
 		case 28:
-			rock = new Rock("Rock29", 80000, 250000, 95);
+			rock = new Rock("Rock29", 80000, 750000, 95);
 			break;
 		case 29:
-			rock = new Rock("Rock30", 100000, 350000, 100);
+			rock = new Rock("Rock30", 100000, 1700000, 100);
+			break;
+		case 30:
+			rock = new Rock("Rock31", 123000, 5000000, 100);
+			break;
+		case 31:
+			rock = new Rock("Rock32", 240000, 6500000, 130);
+			break;
+		case 32:
+			rock = new Rock("Rock33", 350000, 7500000, 175);
+			break;
+		case 33:
+			rock = new Rock("Rock34", 465000, 9750000, 250);
+			break;
+		case 34:
+			rock = new Rock("Rock35", 588000, 12000000, 375);
+			break;
+		case 35:
+			rock = new Rock("Rock36", 600000, 18000000, 420);
+			break;
+		case 36:
+			rock = new Rock("Rock37", 740000, 23000000, 550);
+			break;
+		case 37:
+			rock = new Rock("Rock38", 800000, 50000000, 780);
+			break;
+		case 38:
+			rock = new Rock("Rock39", 950000, 75000000, 895);
+			break;
+		case 39:
+			rock = new Rock("Rock40", 1000000, 100000000, 1000);
+			break;
+		case 40:
+			rock = new Rock("Rock41", 1500000, 150000000, 1500);
+			break;
+		case 41:
+			rock = new Rock("Rock42", 1750000, 175500000, 1700);
+			break;
+		case 42:
+			rock = new Rock("Rock43", 2800000, 175000000, 2000);
+			break;
+		case 43:
+			rock = new Rock("Rock44", 4250000, 200000000, 2100);
+			break;
+		case 44:
+			rock = new Rock("Rock45", 6500000, 350000000, 3500);
+			break;
+		case 45:
+			rock = new Rock("Rock46", 8000000, 400000000, 4000);
+			break;
+		case 46:
+			rock = new Rock("Rock47", 9500000, 450000000, 4500);
+			break;
+		case 47:
+			rock = new Rock("Rock48", 12000000, 600000000, 6000);
+			break;
+		case 48:
+			rock = new Rock("Rock49", 14500000, 750000000, 7500);
+			break;
+		case 49:
+			rock = new Rock("rock50", 20000000, 1000000000, 10000);
 			break;
 		default:
 			rock = new Rock("Rock", 10, 100, 0);
