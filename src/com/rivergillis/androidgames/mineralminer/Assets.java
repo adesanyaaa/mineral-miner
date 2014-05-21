@@ -37,6 +37,9 @@ public class Assets {
 	public static TextureRegion upgradeSelection;
 	public static TextureRegion buyButton;
 	public static TextureRegion buyButtonDimmed;
+	public static TextureRegion exitButton;
+	public static TextureRegion optionsButton;
+	public static TextureRegion optionsScreen;
 	public static TextureRegion upgrade1;
 	
 	public static TextureRegion familiar1;
@@ -75,6 +78,9 @@ public class Assets {
 		upgradeSelection = new TextureRegion(upgrades, 384, 0, 64, 64);
 		buyButton = new TextureRegion(upgrades, 320, 64, 64, 32);
 		buyButtonDimmed = new TextureRegion(upgrades, 384, 64, 64, 32);
+		exitButton = new TextureRegion(upgrades, 448, 0, 32, 32);
+		optionsButton = new TextureRegion(upgrades, 448, 32, 32, 32);
+		optionsScreen = new TextureRegion(upgrades, 320, 96, 200, 248);
 		
 		upgrade1 = new TextureRegion(upgrades, 320, 0, 64, 64);
 		
